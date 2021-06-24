@@ -31,16 +31,16 @@ function init() {
 		1,
 		1000
 	);
-	camera.position.x = 11;
+	camera.position.x = 110;
 	camera.position.y = 11;
-	camera.position.z = 11;
+	camera.position.z = 250;
 	camera.lookAt(new THREE.Vector3( 0, 0, 0 ));
 	scene.add( camera );
 
 	// lighting
 	pointLight = getPointLight( 0.8 );
 	scene.add( pointLight );
-	//camera.add( pointLight );
+	camera.add( pointLight );
 	directionalLight = getDirectionalLight( 1 );
 	directionalLight.position.x = 13;
 	directionalLight.position.y = 10;
@@ -55,7 +55,7 @@ function init() {
 		object.traverse( function ( child ) {
 			if ( child.isMesh ) child.material.map = texture;
 		} );
-		object.position.y = -95;
+		object.position.y = -5;
 		scene.add( object );
 	}
 	const manager = new THREE.LoadingManager( loadModel );
@@ -68,8 +68,8 @@ function init() {
 	const texture = textureLoader.load( 'Assetts/fur.jpg')
 
 	// build objects for scene
-	//let n1 = getNode();
-	//scene.add(n1);
+	let n1 = getNode();
+	scene.add(n1);
 
 	// models
 	function onProgress( xhr ) {
@@ -86,6 +86,7 @@ function init() {
 	const loader = new THREE.OBJLoader( manager );
 	loader.load( 'Assetts/ringGear.obj', function( obj ) {
 		object = obj;
+		object.name = 'g1';
 	}, onProgress, onError );
 
 	// renderer
@@ -107,7 +108,7 @@ function init() {
 	window.addEventListener( 'resize', onWindowResize );
 }
 
-function animate( renderer, scene, camera, controls ) { // get next frame and dispaly
+function animate( /* renderer,*/ scene, camera, controls ) { // get next frame and dispaly
 	//renderer.render( scene, camera );
 	requestAnimationFrame( animate );
 		//TWEEN.update();
@@ -115,18 +116,25 @@ function animate( renderer, scene, camera, controls ) { // get next frame and di
 }
 
 function render() { // update scene here
-//  camera.position.x = ; camera.position.y = ;
-//	camera.lookAt( scene.position );
+//	camera.position.x += ( mouseX - camera.position.x ) * .05;
+//	camera.position.y += ( - mouseY - camera.position.y ) * .05;
+//	camera.lookAt( object.position );
+  scene.getObjectByName('g1').rotation.y += 0.005;
 	renderer.render( scene, camera );
 } 
 
-function onDocumentMouseMove( event ) {}
+function onDocumentMouseMove( event ) {
+	mouseX = ( event.clientX - windowHalfX ) / 2;
+	mouseY = ( event.clientY - windowHalfY ) / 2;
+}
 
-function onDocumentMouseClick( event ) {}
+function onDocumentMouseClick( event ) {
+	console.log("mouse clicked.");
+}
 
 function onWindowResize() {
-//	windowHalfX = window.innerWidth / 2;
-//	windowHalyY = window.innerHeight / 2;
+	windowHalfX = window.innerWidth / 2;
+	windowHalyY = window.innerHeight / 2;
 	camera.aspect = window.innerWidth / window.innerHeight;
 	camera.updateProjectionMatrix();
 	renderer.setSize( window.innerWidth, window.innerHeight );
