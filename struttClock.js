@@ -56,12 +56,14 @@ function init() {
 	// models
 	const loader = new THREE.OBJLoader();
 	const textureLoader = new THREE.TextureLoader();
-	const texture = textureLoader.load( 'Assetts/fur.jpg')
-	loader.load( 'Assetts/ringGear.obj', function ( object ) { // escape
+//	let texture = textureLoader.load( 'Assetts/fur.jpg');
+	let texture;
+	loader.load( 'Assetts/axis.obj', function ( object ) { // escape
 				object.position.x = 0;
-				object.position.y = -2.9;
+				object.position.y = 0;
 				object.position.z = 0;
-				object.name = 'g0';
+				object.name = 'axis';
+				texture = textureLoader.load( 'Assetts/t10.png')
 				object.traverse( function ( child ) {
 					if ( child.isMesh ) child.material.map = texture;
 				} );
@@ -72,11 +74,29 @@ function init() {
 				console.log( 'An error happened' );
 			}
 		);
-	loader.load( 'Assetts/ringGear.obj', function ( object ) { // escape pinion
+	loader.load( 'Assetts/escape.obj', function ( object ) { // escape
 				object.position.x = 0;
-				object.position.y = -2.9;
-				object.position.z = 2;
+				object.position.y = 2;
+				object.position.z = -11.8;
+				object.name = 'g0';
+				texture = textureLoader.load( 'Assetts/t0.png')
+				object.traverse( function ( child ) {
+					if ( child.isMesh ) child.material.map = texture;
+				} );
+				scene.add( object );
+			}, function ( xhr ) {
+				console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+			}, function ( error ) {
+				console.log( 'An error happened' );
+			}
+		);
+	loader.load( 'Assetts/escapePinion.obj', function ( object ) { // escape pinion
+				object.position.x = 0;
+				object.position.y = 3;
+				object.position.z = -11.8;
+				;
 				object.name = 'g1';
+				texture = textureLoader.load( 'Assetts/t1.png')
 				object.traverse( function ( child ) {
 					if ( child.isMesh ) child.material.map = texture;
 				} );
@@ -89,9 +109,10 @@ function init() {
 		);
 	loader.load( 'Assetts/ringGear.obj', function ( object ) { // ring
 				object.position.x = 0;
-				object.position.y = 0;
-				object.position.z = 3;
+				object.position.y = 3;
+				object.position.z = 0;
 				object.name = 'g2';
+				texture = textureLoader.load( 'Assetts/t2.png')
 				object.traverse( function ( child ) {
 					if ( child.isMesh ) child.material.map = texture;
 				} );
@@ -102,11 +123,12 @@ function init() {
 				console.log( 'An error happened' );
 			}
 		);
-	loader.load( 'Assetts/ringGear.obj', function ( object ) { // drive
-				object.position.x = 6.8;
-				object.position.y = 11;
-				object.position.z = 1;
+	loader.load( 'Assetts/drive.obj', function ( object ) { // drive
+				object.position.x = 3.85;
+				object.position.y = 1;
+				object.position.z = 3.85;
 				object.name = 'g3';
+				texture = textureLoader.load( 'Assetts/t3.png')
 				object.traverse( function ( child ) {
 					if ( child.isMesh ) child.material.map = texture;
 				} );
@@ -117,11 +139,12 @@ function init() {
 				console.log( 'An error happened' );
 			}
 		);
-	loader.load( 'Assetts/ringGear.obj', function ( object ) { // drive pinion minutes
+	loader.load( 'Assetts/drivePinionMinutes.obj', function ( object ) { // drive pinion minutes
 				object.position.x = 0;
-				object.position.y = 0;
-				object.position.z = 1;
+				object.position.y = 1;
+				object.position.z = 0;
 				object.name = 'g4';
+				texture = textureLoader.load( 'Assetts/t4.png')
 				object.traverse( function ( child ) {
 					if ( child.isMesh ) child.material.map = texture;
 				} );
@@ -132,11 +155,12 @@ function init() {
 				console.log( 'An error happened' );
 			}
 		);
-	loader.load( 'Assetts/ringGear.obj', function ( object ) { // arm
+	loader.load( 'Assetts/arm.obj', function ( object ) { // arm
 				object.position.x = 0;
-				object.position.y = 0;
-				object.position.z = 2;
+				object.position.y = 2;
+				object.position.z = 0;
 				object.name = 'g5';
+				texture = textureLoader.load( 'Assetts/t5.png')
 				object.traverse( function ( child ) {
 					if ( child.isMesh ) child.material.map = texture;
 				} );
@@ -147,11 +171,12 @@ function init() {
 				console.log( 'An error happened' );
 			}
 		);
-	loader.load( 'Assetts/ringGear.obj', function ( object ) { // planet
-				object.position.x = 12.7;
-				object.position.y = 0;
-				object.position.z = 3;
+	loader.load( 'Assetts/planet.obj', function ( object ) { // planet
+				object.position.x = -5.25;
+				object.position.y = 3;
+				object.position.z = 0;
 				object.name = 'g6';
+				texture = textureLoader.load( 'Assetts/t6.png')
 				object.traverse( function ( child ) {
 					if ( child.isMesh ) child.material.map = texture;
 				} );
@@ -162,11 +187,12 @@ function init() {
 				console.log( 'An error happened' );
 			}
 		);
-	loader.load( 'Assetts/ringGear.obj', function ( object ) { // planet pinion
-				object.position.x = 12.7;
-				object.position.y = 0;
-				object.position.z = 4.5;
+	loader.load( 'Assetts/planetPinion.obj', function ( object ) { // planet pinion
+				object.position.x = -5.25;
+				object.position.y = 4.5;
+				object.position.z = 0;
 				object.name = 'g7';
+				texture = textureLoader.load( 'Assetts/t7.png')
 				object.traverse( function ( child ) {
 					if ( child.isMesh ) child.material.map = texture;
 				} );
@@ -177,11 +203,12 @@ function init() {
 				console.log( 'An error happened' );
 			}
 		);
-	loader.load( 'Assetts/ringGear.obj', function ( object ) { // sun free hour
+	loader.load( 'Assetts/sunFreeHour.obj', function ( object ) { // sun free hour
 				object.position.x = 0;
-				object.position.y = 0;
-				object.position.z = 4;
+				object.position.y = 4;
+				object.position.z = 0;
 				object.name = 'g8';
+				texture = textureLoader.load( 'Assetts/t8.png')
 				object.traverse( function ( child ) {
 					if ( child.isMesh ) child.material.map = texture;
 				} );
@@ -192,11 +219,12 @@ function init() {
 				console.log( 'An error happened' );
 			}
 		);
-	loader.load( 'Assetts/ringGear.obj', function ( object ) { // sun fixed
+	loader.load( 'Assetts/sunFixed.obj', function ( object ) { // sun fixed
 				object.position.x = 0;
-				object.position.y = 0;
-				object.position.z = 5;
+				object.position.y = 5;
+				object.position.z = 0;
 				object.name = 'g9';
+				texture = textureLoader.load( 'Assetts/t9.png')
 				object.traverse( function ( child ) {
 					if ( child.isMesh ) child.material.map = texture;
 				} );
@@ -239,8 +267,13 @@ function degrees_to_radians( degrees )
 
 function animate( /* renderer,*/ scene, camera, controls ) { // get next frame and dispaly
 	//renderer.render( scene, camera );
-	requestAnimationFrame( animate );
+//	requestAnimationFrame( animate );
 		//TWEEN.update();
+
+		setTimeout( function() {
+			requestAnimationFrame( animate );
+		}, 1000 / 30);
+
 	render();
 }
 
@@ -248,24 +281,21 @@ function render() { // update scene here
 //	camera.position.x += ( mouseX - camera.position.x ) * .05;
 //	camera.position.y += ( - mouseY - camera.position.y ) * .05;
 //	camera.lookAt( object.position );
-
-		console.log("Updating");
-		scene.getObjectByName('g0').rotation.y -= degrees_to_radians(14.0929481132076); // escape
-		scene.getObjectByName('g1').rotation.y -= degrees_to_radians(14.0929481132076); // escape pinion
-		scene.getObjectByName('g2').rotation.y += degrees_to_radians(0.503319575471701); // ring
-		scene.getObjectByName('g3').rotation.y -= degrees_to_radians(.1); // drive
-		scene.getObjectByName('g4').rotation.y += degrees_to_radians(.1); // drive pinion minutes
-		scene.getObjectByName('g5').rotation.y += degrees_to_radians(.1); // arm
-		scene.getObjectByName('g6').rotation.y += degrees_to_radians(0.854716981132079); // planet
-		scene.getObjectByName('g6').position.x = Math.cos(orbit) * 12.7;
-		scene.getObjectByName('g6').position.z = Math.sin(orbit) * 12.7;
-		scene.getObjectByName('g7').rotation.y += degrees_to_radians(0.854716981132079); // planet pinion
-		scene.getObjectByName('g7').position.x = Math.cos(orbit) * 12.7;
-		scene.getObjectByName('g7').position.z = Math.sin(orbit) * 12.7;
-		orbit += degrees_to_radians(.1);
-		scene.getObjectByName('g8').rotation.y += degrees_to_radians(0.00833333); // sun free hour
-		scene.getObjectByName('g9').rotation.y += degrees_to_radians(0); // sun fixed
-		lastSec = currentSec;
+	scene.getObjectByName('g0').rotation.y -= degrees_to_radians(14.0929481132076);		// escape
+	scene.getObjectByName('g1').rotation.y -= degrees_to_radians(14.0929481132076);		// escape pinion
+	scene.getObjectByName('g2').rotation.y += degrees_to_radians(0.503319575471701);	// ring
+	scene.getObjectByName('g3').rotation.y -= degrees_to_radians(.0925);									// drive
+	scene.getObjectByName('g4').rotation.y += degrees_to_radians(.0925);									// drive pinion minutes
+	scene.getObjectByName('g5').rotation.y += degrees_to_radians(.0925);									// arm
+	scene.getObjectByName('g6').rotation.y += degrees_to_radians(0.854716981132079);	// planet
+	scene.getObjectByName('g6').position.x = Math.cos(orbit) * -5.25;
+	scene.getObjectByName('g6').position.z = Math.sin(orbit) * -5.25;
+	scene.getObjectByName('g7').rotation.y += degrees_to_radians(0.854716981132079);	// planet pinion
+	scene.getObjectByName('g7').position.x = Math.cos(orbit) * -5.25;
+	scene.getObjectByName('g7').position.z = Math.sin(orbit) * -5.25;
+	orbit -= degrees_to_radians(0.0925);
+	scene.getObjectByName('g8').rotation.y += degrees_to_radians(0.00833333);					// sun free hour
+	scene.getObjectByName('g9').rotation.y += degrees_to_radians(0);									// sun fixed
 	renderer.render( scene, camera );
 } 
 
