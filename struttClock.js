@@ -58,26 +58,26 @@ function init() {
 	const textureLoader = new THREE.TextureLoader();
 //	let texture = textureLoader.load( 'Assetts/fur.jpg');
 	let texture;
-	loader.load( 'Assetts/axis.obj', function ( object ) { // escape
-				object.position.x = 0;
-				object.position.y = 0;
-				object.position.z = 0;
-				object.name = 'axis';
-				texture = textureLoader.load( 'Assetts/t10.png')
-				object.traverse( function ( child ) {
-					if ( child.isMesh ) child.material.map = texture;
-				} );
-				scene.add( object );
-			}, function ( xhr ) {
-				console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-			}, function ( error ) {
-				console.log( 'An error happened' );
-			}
-		);
+//	loader.load( 'Assetts/axis.obj', function ( object ) { // escape
+//				object.position.x = 0;
+//				object.position.y = 0;
+//				object.position.z = 0;
+//				object.name = 'axis';
+//				texture = textureLoader.load( 'Assetts/t10.png')
+//				object.traverse( function ( child ) {
+//					if ( child.isMesh ) child.material.map = texture;
+//				} );
+//				scene.add( object );
+//			}, function ( xhr ) {
+//				console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+//			}, function ( error ) {
+//				console.log( 'An error happened' );
+//			}
+//		);
 	loader.load( 'Assetts/escape.obj', function ( object ) { // escape
 				object.position.x = 0;
 				object.position.y = 2;
-				object.position.z = -11.8;
+				object.position.z = -11.6;
 				object.name = 'g0';
 				texture = textureLoader.load( 'Assetts/t0.png')
 				object.traverse( function ( child ) {
@@ -93,7 +93,7 @@ function init() {
 	loader.load( 'Assetts/escapePinion.obj', function ( object ) { // escape pinion
 				object.position.x = 0;
 				object.position.y = 3;
-				object.position.z = -11.8;
+				object.position.z = -11.6;
 				;
 				object.name = 'g1';
 				texture = textureLoader.load( 'Assetts/t1.png')
@@ -124,9 +124,9 @@ function init() {
 			}
 		);
 	loader.load( 'Assetts/drive.obj', function ( object ) { // drive
-				object.position.x = 3.85;
+				object.position.x = 3.67;
 				object.position.y = 1;
-				object.position.z = 3.85;
+				object.position.z = 3.67;
 				object.name = 'g3';
 				texture = textureLoader.load( 'Assetts/t3.png')
 				object.traverse( function ( child ) {
@@ -172,7 +172,7 @@ function init() {
 			}
 		);
 	loader.load( 'Assetts/planet.obj', function ( object ) { // planet
-				object.position.x = -5.25;
+				object.position.x = -5.07;
 				object.position.y = 3;
 				object.position.z = 0;
 				object.name = 'g6';
@@ -188,8 +188,8 @@ function init() {
 			}
 		);
 	loader.load( 'Assetts/planetPinion.obj', function ( object ) { // planet pinion
-				object.position.x = -5.25;
-				object.position.y = 4.5;
+				object.position.x = -5.07;
+				object.position.y = 3;
 				object.position.z = 0;
 				object.name = 'g7';
 				texture = textureLoader.load( 'Assetts/t7.png')
