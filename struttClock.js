@@ -19,7 +19,8 @@ let orbit = 0;
 let now;
 let currentSec;
 let lastSec;
-let rate = 20;
+let rate = 5; // non zero - 60 for accurate timing
+//let rotationOn = false;
 let rotationOn = true;
 
 init();
@@ -79,7 +80,7 @@ function init() {
 	loader.load( 'Assetts/escape.obj', function ( object ) { // escape
 				object.position.x = 0;
 				object.position.y = 1.5;
-				object.position.z = -11.45;
+				object.position.z = -11.4;
 				object.rotation.y = 0.55;
 				object.name = 'g0';
 				texture = textureLoader.load( 'Assetts/t0.png')
@@ -96,7 +97,7 @@ function init() {
 	loader.load( 'Assetts/escapePinion.obj', function ( object ) { // escape pinion
 				object.position.x = 0;
 				object.position.y = 1.5;
-				object.position.z = -11.45;
+				object.position.z = -11.4;
 				object.rotation.y = 0.55;
 				object.name = 'g1';
 				texture = textureLoader.load( 'Assetts/t1.png')
@@ -128,9 +129,9 @@ function init() {
 			}
 		);
 	loader.load( 'Assetts/drive.obj', function ( object ) { // drive
-				object.position.x = 3.45;
+				object.position.x = 3.642;
 				object.position.y = 1;
-				object.position.z = 3.45;
+				object.position.z = 3.642;
 				object.name = 'g3';
 				texture = textureLoader.load( 'Assetts/t3.png')
 				object.traverse( function ( child ) {
@@ -177,7 +178,7 @@ function init() {
 			}
 		);
 	loader.load( 'Assetts/planet.obj', function ( object ) { // planet
-				object.position.x = -4.95;
+				object.position.x = -4.65;
 				object.position.y = 2;
 				object.position.z = 0;
 				object.rotation.y = 0;
@@ -194,10 +195,10 @@ function init() {
 			}
 		);
 	loader.load( 'Assetts/planetPinion.obj', function ( object ) { // planet pinion
-				object.position.x = -4.95;
+				object.position.x = -4.65;
 				object.position.y = 2;
 				object.position.z = 0;
-				object.rotation.y = 0.5;
+				object.rotation.y = degrees_to_radians(22.5);
 				object.name = 'g7';
 				texture = textureLoader.load( 'Assetts/t7.png')
 				object.traverse( function ( child ) {
@@ -230,6 +231,7 @@ function init() {
 				object.position.x = 0;
 				object.position.y = 3.0;
 				object.position.z = 0;
+				object.rotation.y = degrees_to_radians(90);
 				object.name = 'g9';
 				texture = textureLoader.load( 'Assetts/t9.png')
 				object.traverse( function ( child ) {
@@ -289,21 +291,21 @@ function render() { // update scene here
 //	camera.position.y += ( - mouseY - camera.position.y ) * .05;
 //	camera.lookAt( object.position );
 if (rotationOn == true) {
-		scene.getObjectByName('g0').rotation.y -= degrees_to_radians(14.0929481132076)/rate;		// escape
-		scene.getObjectByName('g1').rotation.y -= degrees_to_radians(14.0929481132076)/rate;		// escape pinion
-		scene.getObjectByName('g2').rotation.y += degrees_to_radians(0.503319575471701)/rate;	// ring
-		scene.getObjectByName('g3').rotation.y -= degrees_to_radians(.0925)/rate;									// drive
-		scene.getObjectByName('g4').rotation.y += degrees_to_radians(.0925)/rate;									// drive pinion minutes
-		scene.getObjectByName('g5').rotation.y += degrees_to_radians(.0925)/rate;									// arm
-		scene.getObjectByName('g6').rotation.y += degrees_to_radians(0.854716981132079)/rate;	// planet
-		scene.getObjectByName('g6').position.x = Math.cos(orbit) * -4.95;
-		scene.getObjectByName('g6').position.z = Math.sin(orbit) * -4.95;
-		scene.getObjectByName('g7').rotation.y += degrees_to_radians(0.854716981132079)/rate;	// planet pinion
-		scene.getObjectByName('g7').position.x = Math.cos(orbit) * -4.95;
-		scene.getObjectByName('g7').position.z = Math.sin(orbit) * -4.95;
-		orbit -= degrees_to_radians(0.0925)/rate;
-		scene.getObjectByName('g8').rotation.y += degrees_to_radians(0.00833333)/rate;					// sun free hour
-		scene.getObjectByName('g9').rotation.y += degrees_to_radians(0)/rate;									// sun fixed
+		scene.getObjectByName('g0').rotation.y += degrees_to_radians(13.7075555555555)/rate;								//* escape
+		scene.getObjectByName('g1').rotation.y += degrees_to_radians(13.7075555555555)/rate;								//* escape pinion
+		scene.getObjectByName('g2').rotation.y -= degrees_to_radians(0.48955555555555)/rate;								//* ring
+		scene.getObjectByName('g3').rotation.y += degrees_to_radians(1.2)/rate;															// drive
+		scene.getObjectByName('g4').rotation.y -= degrees_to_radians(0.1)/rate;															//* drive pinion minutes
+		scene.getObjectByName('g5').rotation.y -= degrees_to_radians(.1)/rate;															//* arm
+		scene.getObjectByName('g6').rotation.y -= degrees_to_radians(0.92499999999999)/rate;								//* planet
+		scene.getObjectByName('g6').position.x = Math.cos(orbit) * -4.65; //*
+		scene.getObjectByName('g6').position.z = Math.sin(orbit) * -4.65; //*
+		scene.getObjectByName('g7').rotation.y -= degrees_to_radians(0.92499999999999)/rate;//.9166)/rate;	//* planet pinion 
+		scene.getObjectByName('g7').position.x = Math.cos(orbit) * -4.65; //*
+		scene.getObjectByName('g7').position.z = Math.sin(orbit) * -4.65; //*
+		orbit += degrees_to_radians(0.1)/rate;		//*
+		scene.getObjectByName('g8').rotation.y -= degrees_to_radians(0.008333333333333)/rate;							//* sun free hour 
+		scene.getObjectByName('g9').rotation.y -= degrees_to_radians(0)/rate;															//* sun fixed 
 	}
 	renderer.render( scene, camera );
 } 
