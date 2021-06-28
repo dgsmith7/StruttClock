@@ -1,9 +1,11 @@
-////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 //   "Strutt Epicyclic Clock Model"
 //   June 2021
 //   Original code by David Gail Smith
-//   Attribution:
-////////////////////////////////////////////
+//   Attribution / Inspiration:
+//      http://www.awci.com/wp-content/uploads/ht/2005/2005-01-web.pdf  page 12-16
+//      https://www.youtube.com/watch?v=uwv7Z2I-JiI
+//////////////////////////////////////////////////////////////////////////////////
 
 let container;
 let camera, scene, renderer;
@@ -19,7 +21,7 @@ let orbit = 0;
 let now;
 let currentSec;
 let lastSec;
-let rate = 5; // non zero - 60 for accurate timing
+let rate = 1; // non zero - 60 for accurate timing
 //let rotationOn = false;
 let rotationOn = true;
 
@@ -59,24 +61,7 @@ function init() {
 	// models
 	const loader = new THREE.OBJLoader();
 	const textureLoader = new THREE.TextureLoader();
-//	let texture = textureLoader.load( 'Assetts/fur.jpg');
 	let texture;
-//	loader.load( 'Assetts/axis.obj', function ( object ) { // escape
-//				object.position.x = 0;
-//				object.position.y = 0;
-//				object.position.z = 0;
-//				object.name = 'axis';
-//				texture = textureLoader.load( 'Assetts/t10.png')
-//				object.traverse( function ( child ) {
-//					if ( child.isMesh ) child.material.map = texture;
-//				} );
-//				scene.add( object );
-//			}, function ( xhr ) {
-//				console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-//			}, function ( error ) {
-//				console.log( 'An error happened' );
-//			}
-//		);
 	loader.load( 'Assetts/escape.obj', function ( object ) { // escape
 				object.position.x = 0;
 				object.position.y = 1.5;
@@ -94,13 +79,13 @@ function init() {
 				console.log( 'An error happened' );
 			}
 		);
-	loader.load( 'Assetts/escapePinion.obj', function ( object ) { // escape pinion
+	loader.load( 'Assetts/models/escapePinion.obj', function ( object ) { // escape pinion
 				object.position.x = 0;
 				object.position.y = 1.5;
 				object.position.z = -11.4;
 				object.rotation.y = 0.55;
 				object.name = 'g1';
-				texture = textureLoader.load( 'Assetts/t1.png')
+				texture = textureLoader.load( 'Assetts/textures/t1.png')
 				object.traverse( function ( child ) {
 					if ( child.isMesh ) child.material.map = texture;
 				} );
@@ -111,13 +96,13 @@ function init() {
 				console.log( 'An error happened' );
 			}
 		);
-	loader.load( 'Assetts/ringGear.obj', function ( object ) { // ring
+	loader.load( 'Assetts/models/ringGear.obj', function ( object ) { // ring
 				object.position.x = 0;
 				object.position.y = 2;
 				object.position.z = 0;
 				object.rotation.y = 0;
 				object.name = 'g2';
-				texture = textureLoader.load( 'Assetts/t2.png')
+				texture = textureLoader.load( 'Assetts/textures/t2.png')
 				object.traverse( function ( child ) {
 					if ( child.isMesh ) child.material.map = texture;
 				} );
@@ -128,12 +113,12 @@ function init() {
 				console.log( 'An error happened' );
 			}
 		);
-	loader.load( 'Assetts/drive.obj', function ( object ) { // drive
-				object.position.x = 3.642;
+	loader.load( 'Assetts/models/drive.obj', function ( object ) { // drive
+				object.position.x = 3.85;
 				object.position.y = 1;
-				object.position.z = 3.642;
+				object.position.z = 3.85;
 				object.name = 'g3';
-				texture = textureLoader.load( 'Assetts/t3.png')
+				texture = textureLoader.load( 'Assetts/textures/t3.png')
 				object.traverse( function ( child ) {
 					if ( child.isMesh ) child.material.map = texture;
 				} );
@@ -144,13 +129,13 @@ function init() {
 				console.log( 'An error happened' );
 			}
 		);
-	loader.load( 'Assetts/drivePinionMinutes.obj', function ( object ) { // drive pinion minutes
+	loader.load( 'Assetts/models/drivePinionMinutes.obj', function ( object ) { // drive pinion minutes
 				object.position.x = 0;
 				object.position.y = 1;
 				object.position.z = 0;
 				object.rotation.y = 0.4;
 				object.name = 'g4';
-				texture = textureLoader.load( 'Assetts/t4.png')
+				texture = textureLoader.load( 'Assetts/textures/t4.png')
 				object.traverse( function ( child ) {
 					if ( child.isMesh ) child.material.map = texture;
 				} );
@@ -161,12 +146,12 @@ function init() {
 				console.log( 'An error happened' );
 			}
 		);
-	loader.load( 'Assetts/arm.obj', function ( object ) { // arm
+	loader.load( 'Assetts/models/arm.obj', function ( object ) { // arm
 				object.position.x = 0;
 				object.position.y = 1.5;
 				object.position.z = 0;
 				object.name = 'g5';
-				texture = textureLoader.load( 'Assetts/t5.png')
+				texture = textureLoader.load( 'Assetts/textures/t5.png')
 				object.traverse( function ( child ) {
 					if ( child.isMesh ) child.material.map = texture;
 				} );
@@ -177,13 +162,13 @@ function init() {
 				console.log( 'An error happened' );
 			}
 		);
-	loader.load( 'Assetts/planet.obj', function ( object ) { // planet
+	loader.load( 'Assetts/models/planet.obj', function ( object ) { // planet
 				object.position.x = -4.65;
 				object.position.y = 2;
 				object.position.z = 0;
 				object.rotation.y = 0;
 				object.name = 'g6';
-				texture = textureLoader.load( 'Assetts/t6.png')
+				texture = textureLoader.load( 'Assetts/textures/t6.png')
 				object.traverse( function ( child ) {
 					if ( child.isMesh ) child.material.map = texture;
 				} );
@@ -194,13 +179,13 @@ function init() {
 				console.log( 'An error happened' );
 			}
 		);
-	loader.load( 'Assetts/planetPinion.obj', function ( object ) { // planet pinion
+	loader.load( 'Assetts/models/planetPinion.obj', function ( object ) { // planet pinion
 				object.position.x = -4.65;
 				object.position.y = 2;
 				object.position.z = 0;
 				object.rotation.y = degrees_to_radians(22.5);
 				object.name = 'g7';
-				texture = textureLoader.load( 'Assetts/t7.png')
+				texture = textureLoader.load( 'Assetts/textures/t7.png')
 				object.traverse( function ( child ) {
 					if ( child.isMesh ) child.material.map = texture;
 				} );
@@ -211,12 +196,12 @@ function init() {
 				console.log( 'An error happened' );
 			}
 		);
-	loader.load( 'Assetts/sunFreeHour.obj', function ( object ) { // sun free hour
+	loader.load( 'Assetts/models/sunFreeHour.obj', function ( object ) { // sun free hour
 				object.position.x = 0;
 				object.position.y = 2.5;
 				object.position.z = 0;
 				object.name = 'g8';
-				texture = textureLoader.load( 'Assetts/t8.png')
+				texture = textureLoader.load( 'Assetts/textures/t8.png')
 				object.traverse( function ( child ) {
 					if ( child.isMesh ) child.material.map = texture;
 				} );
@@ -227,13 +212,13 @@ function init() {
 				console.log( 'An error happened' );
 			}
 		);
-	loader.load( 'Assetts/sunFixed.obj', function ( object ) { // sun fixed
+	loader.load( 'Assetts/models/sunFixed.obj', function ( object ) { // sun fixed
 				object.position.x = 0;
 				object.position.y = 3.0;
 				object.position.z = 0;
 				object.rotation.y = degrees_to_radians(90);
 				object.name = 'g9';
-				texture = textureLoader.load( 'Assetts/t9.png')
+				texture = textureLoader.load( 'Assetts/textures/t9.png')
 				object.traverse( function ( child ) {
 					if ( child.isMesh ) child.material.map = texture;
 				} );
@@ -294,7 +279,7 @@ if (rotationOn == true) {
 		scene.getObjectByName('g0').rotation.y += degrees_to_radians(13.7075555555555)/rate;								//* escape
 		scene.getObjectByName('g1').rotation.y += degrees_to_radians(13.7075555555555)/rate;								//* escape pinion
 		scene.getObjectByName('g2').rotation.y -= degrees_to_radians(0.48955555555555)/rate;								//* ring
-		scene.getObjectByName('g3').rotation.y += degrees_to_radians(1.2)/rate;															// drive
+		scene.getObjectByName('g3').rotation.y += degrees_to_radians(.012)/rate;															//* drive
 		scene.getObjectByName('g4').rotation.y -= degrees_to_radians(0.1)/rate;															//* drive pinion minutes
 		scene.getObjectByName('g5').rotation.y -= degrees_to_radians(.1)/rate;															//* arm
 		scene.getObjectByName('g6').rotation.y -= degrees_to_radians(0.92499999999999)/rate;								//* planet
