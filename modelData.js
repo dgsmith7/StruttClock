@@ -1,13 +1,15 @@
-modelData = '[
+const models =
+	[
    {
       "fileName":"escape.obj",
       "name":"g0",
-      "xPosit":"0;",
+      "xPosit":"0",
       "yPosit":"1.5",
       "zPosit":"-11.4",
       "yRot":"0.55",
-      "mat":"",
-      "textureFileName":"t0.png"
+      "textureFileName":"t0.png",
+      "rotPerSec":"13.708",
+      "orbitArm":"0.0"
    },
    {
       "fileName":"escapePinion.obj",
@@ -16,8 +18,9 @@ modelData = '[
       "yPosit":"1.5",
       "zPosit":"-11.4",
       "yRot":"0.55",
-      "mat":"",
-      "textureFileNName":"t1.png"
+      "textureFileName":"t1.png",
+      "rotPerSec":"13.708",
+      "orbitArm":"0.0"
    },
    {
       "fileName":"ringGear.obj",
@@ -26,8 +29,9 @@ modelData = '[
       "yPosit":"2",
       "zPosit":"0",
       "yRot":"0",
-      "mat":"",
-      "textureFileNName":"t2.png"
+      "textureFileName":"t2.png",
+      "rotPerSec":"-0.48959",
+      "orbitArm":"0.0"
    },
    {
       "fileName":"drive.obj",
@@ -36,8 +40,9 @@ modelData = '[
       "yPosit":"1",
       "zPosit":"3.85",
       "yRot":"0.0",
-      "mat":"",
-      "textureFileNName":"t3.png"
+      "textureFileName":"t3.png",
+      "rotPerSec":"0.0083333333333",
+      "orbitArm":"0.0"
    },
    {
       "fileName":"drivePinionMinutes.obj",
@@ -46,8 +51,9 @@ modelData = '[
       "yPosit":"1",
       "zPosit":"0",
       "yRot":"0.4",
-      "mat":"",
-      "textureFileNName":"t4.png"
+      "textureFileName":"t4.png",
+      "rotPerSec":"-0.1",
+      "orbitArm":"0.0"
    },
    {
       "fileName":"arm.obj",
@@ -56,8 +62,9 @@ modelData = '[
       "yPosit":"1.5",
       "zPosit":"0",
       "yRot":"0.0",
-      "mat":"",
-      "textureFileNName":"t5.png"
+      "textureFileName":"t5.png",
+      "rotPerSec":"-0.1",
+      "orbitArm":"0.0"
    },
    {
       "fileName":"planet.obj",
@@ -66,8 +73,9 @@ modelData = '[
       "yPosit":"2",
       "zPosit":"0",
       "yRot":"0",
-      "mat":"",
-      "textureFileNName":"t6.png"
+      "textureFileName":"t6.png",
+      "rotPerSec":"-0.92499999999999",
+      "orbitArm":"-4.65"
    },
    {
       "fileName":"planetPinion.obj",
@@ -76,8 +84,9 @@ modelData = '[
       "yPosit":"2",
       "zPosit":"0",
       "yRot":"0.393",
-      "mat":"",
-      "textureFileNName":"t7.png"
+      "textureFileName":"t7.png",
+      "rotPerSec":"-0.92499999999999",
+      "orbitArm":"-4.65"
    },
    {
       "fileName":"sunFreeHour.obj",
@@ -86,8 +95,9 @@ modelData = '[
       "yPosit":"2.5",
       "zPosit":"0",
       "yRot":"0",
-      "mat":"",
-      "textureFileNName":"t8.png"
+      "textureFileName":"t8.png",
+      "rotPerSec":"-0.008333333333333",
+      "orbitArm":"0.0"
    },
    {
       "fileName":"sunFixed.obj",
@@ -96,7 +106,8 @@ modelData = '[
       "yPosit":"3.0",
       "zPosit":"0",
       "yRot":"1.57",
-      "mat":"",
-      "textureFileNName":"t9.png"
+      "textureFileName":"t9.png",
+      "rotPerSec":"0.0",
+      "orbitArm":"0.0"
    }
-]';
+];
