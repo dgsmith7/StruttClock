@@ -7,7 +7,7 @@ const models =
       "yPosit":"0",
       "zPosit":"-11.4",
       "yRot":"0.55",
-      "textureFileName":"rustySteel.png",
+      "textureFileName":"copperPatina.png",
       "rotPerSec":"13.708",
       "orbitArm":"0.0"
    },
@@ -18,7 +18,7 @@ const models =
       "yPosit":"0",
       "zPosit":"-11.4",
       "yRot":"0.55",
-      "textureFileName":"rustySteel.png",
+      "textureFileName":"copperPatina.png",
       "rotPerSec":"13.708",
       "orbitArm":"0.0"
    },
@@ -29,7 +29,7 @@ const models =
       "yPosit":"0.5",
       "zPosit":"0",
       "yRot":"0",
-      "textureFileName":"rustySteel.png",
+      "textureFileName":"copperPatina.png",
       "rotPerSec":"-0.48959",
       "orbitArm":"0.0"
    },
@@ -40,7 +40,7 @@ const models =
       "yPosit":"-0.5",
       "zPosit":"3.85",
       "yRot":"0.0",
-      "textureFileName":"rustySteel.png",
+      "textureFileName":"copperPatina.png",
       "rotPerSec":"0.0083333333333",
       "orbitArm":"0.0"
    },
@@ -51,7 +51,7 @@ const models =
       "yPosit":"-0.5",
       "zPosit":"0",
       "yRot":"0.4",
-      "textureFileName":"rustySteel.png",
+      "textureFileName":"copperPatina.png",
       "rotPerSec":"-0.1",
       "orbitArm":"0.0"
    },
@@ -62,7 +62,7 @@ const models =
       "yPosit":"0",
       "zPosit":"0",
       "yRot":"0.0",
-      "textureFileName":"rustySteel.png",
+      "textureFileName":"copperPatina.png",
       "rotPerSec":"-0.1",
       "orbitArm":"0.0"
    },
@@ -73,7 +73,7 @@ const models =
       "yPosit":"0.5",
       "zPosit":"0",
       "yRot":"0",
-      "textureFileName":"rustySteel.png",
+      "textureFileName":"copperPatina.png",
       "rotPerSec":"-0.92499999999999",
       "orbitArm":"-4.65"
    },
@@ -84,7 +84,7 @@ const models =
       "yPosit":"0.5",
       "zPosit":"0",
       "yRot":"0.393",
-      "textureFileName":"rustySteel.png",
+      "textureFileName":"copperPatina.png",
       "rotPerSec":"-0.92499999999999",
       "orbitArm":"-4.65"
    },
@@ -95,7 +95,7 @@ const models =
       "yPosit":"1",
       "zPosit":"0",
       "yRot":"0",
-      "textureFileName":"rustySteel.png",
+      "textureFileName":"copperPatina.png",
       "rotPerSec":"-0.008333333333333",
       "orbitArm":"0.0"
    },
@@ -106,7 +106,7 @@ const models =
       "yPosit":"1.5",
       "zPosit":"0",
       "yRot":"1.57",
-      "textureFileName":"rustySteel.png",
+      "textureFileName":"copperPatina.png",
       "rotPerSec":"0.0",
       "orbitArm":"0.0"
    }
