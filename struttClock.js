@@ -27,9 +27,21 @@ let orbit = 0;
 let now;
 let currentSec;
 let lastSec;
-let rate = .5; // non zero - 60 for accurate timing
+let rate = 10; // non zero - 60 for accurate timing
 //let rotationOn = false;
 let rotationOn = true;
+let expansion = { intensity : 1 };
+
+//  var twn = [];
+//  var change = true;
+//  var twnLen = 20000;
+
+
+// Set up GUI if desired
+  var gui = new dat.GUI();
+  gui.add(expansion, 'intensity', 1, 10).name("Expansion");
+
+
 
 init();
 animate();
@@ -42,13 +54,14 @@ function init() {
 	// lighting
 	setLights();
 	// models
-	loadModels();
+	loadAssets();
 	// renderer
 	buildRenderer();
 	// orbit controlls if desired
 	addOrbitControls();
 	// event listeners
 	window.addEventListener( 'resize', onWindowResize );
+	animate();
 }
 
 function animate( /* renderer,*/ scene, camera, controls ) { // get next frame and dispaly
@@ -66,9 +79,17 @@ function render() { // update scene here
 	//	camera.position.x += ( mouseX - camera.position.x ) * .05;
 	//	camera.position.y += ( - mouseY - camera.position.y ) * .05;
 	//	camera.lookAt( object.position );
+
+//	    twn[ang] = new TWEEN.Tween(coords)
+//        .to({x: posit.x, y: posit.y, z: posit.z}, twnLen)
+//        .easing(TWEEN.Easing.Cubic.InOut)
+//        .start();
+
+
 	if (rotationOn == true) {
 		for (const model of Object.values(models)) {
 			scene.getObjectByName(model.name).rotation.y += degrees_to_radians(model.rotPerSec)/rate;								//* escape
+			scene.getObjectByName(model.name).position.y = model.yPosit * expansion.intensity;
 			if (model.orbitArm != 0.0) {
 				scene.getObjectByName(model.name).position.x = Math.cos(orbit) * model.orbitArm; 
 				scene.getObjectByName(model.name).position.z = Math.sin(orbit) * model.orbitArm; 
@@ -77,6 +98,10 @@ function render() { // update scene here
 		orbit += degrees_to_radians(0.1)/rate;		//*
 		scene.updateMatrixWorld();
 	}
+
+
+//	    TWEEN.update();
+
 	renderer.render( scene, camera );
 } 
 
@@ -101,34 +126,40 @@ function setLights() {
 	scene.add( ambientLight );
 }
 
-function loadModels() {
+function loadAssets() {
 	const loader = new THREE.OBJLoader();
 	const textureLoader = new THREE.TextureLoader();
 	let texture;
-	const material = new THREE.MeshPhongMaterial();
-	const model =  {};
+	const material = new THREE.MeshPhongMaterial({ 
+		color : 0xFF0000, 
+		shininess : 150,
+		flatShading : true,
+		emmisive : 0x0000FF,
+		emmisiveIntensity : 1,
+		wireframe : false
+	});
 	for (const model of Object.values(models)) {
-		loader.load( 'assetts/models/' + model.fileName, function ( object ) { // escape
-					object.name = model.name;
-					object.position = new THREE.Vector3();
-					object.position.x = model.xPosit;
-					object.position.y = model.yPosit;
-					object.position.z = model.zPosit;
-					object.rotation.y = parseFloat(model.yRot);
-					texture = textureLoader.load( 'assetts/textures/' + model.textureFileName);
-					object.traverse( function ( child ) {
-						if ( child.isMesh ) {
-							child.material = material;
-							child.material.map = texture;
-						}
-					} );
-					scene.add( object );
-				}, function ( xhr ) {
-					console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-				}, function ( error ) {
-					console.log( 'An error happened' );
+		loader.load( 'assetts/models/' + model.fileName + 'obj', function ( object ) { // escape
+			object.name = model.name;
+			object.position = new THREE.Vector3();
+			object.position.x = model.xPosit;
+			object.position.y = model.yPosit;
+			object.position.z = model.zPosit;
+			object.rotation.y = parseFloat(model.yRot);
+			texture = textureLoader.load( 'assetts/textures/' + model.textureFileName);
+			object.traverse( function ( child ) {
+				if ( child.isMesh ) {
+//					child.material = material;
+					child.material.map = texture;
 				}
-			);
+			} );
+			console.log( material );
+			scene.add( object );
+		}, function ( xhr ) {
+			console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+		}, function ( error ) {
+			console.log( 'An error happened' );
+		} );
 	}
 }
 
