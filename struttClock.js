@@ -30,7 +30,7 @@ var now;
 var currentSec;
 var lastSec;
 //var rate = 10; // non zero - 60 for accurate timing
-var timeLapse = { rate : 1 };
+var timeLapse = { rate : 10 };
 //var rotationOn = false;
 var rotationOn = true;
 var expansion = { intensity : 1 };
@@ -144,22 +144,22 @@ function loadAssets() {
 //		wireframe : false
 //	});
 
-
-////				// Texture cubes as background
-//				const tcLoader = new THREE.CubeTextureLoader();
-//				tcLoader.setPath( 'assetts/textures/cube/polishedBrass/' );  // pixels power of 2
-//				textureCube = tcLoader.load( [ 'posx.png', 'negx.png', 'posy.png', 'negy.png', 'posz.png', 'negz.png' ] );
-//				textureCube.encoding = THREE.sRGBEncoding;
-////				textureCube.mapping = THREE.CubeRefractionMapping;
-//				textureCube.mapping = THREE.CubeReflectionMapping;
-////				textureEquirec = textureLoader.load( 'textures/2294472375_24a3b8ef46_o.jpg' );
-////				textureEquirec.mapping = THREE.EquirectangularReflectionMapping;
-////				textureEquirec.encoding = THREE.sRGBEncoding;
-////				scene.background = textureCube;
-//				let material = new THREE.MeshLambertMaterial( { envMap: textureCube } );
-////				//
-
 let material;
+
+//				// Texture cubes as background
+				const tcLoader = new THREE.CubeTextureLoader();
+				tcLoader.setPath( 'assetts/textures/cube/polishedBrass/' );  // pixels power of 2
+				textureCube = tcLoader.load( [ 'posx.png', 'negx.png', 'posy.png', 'negy.png', 'posz.png', 'negz.png' ] );
+				textureCube.encoding = THREE.sRGBEncoding;
+//				textureCube.mapping = THREE.CubeRefractionMapping;
+				textureCube.mapping = THREE.CubeReflectionMapping;
+//				textureEquirec = textureLoader.load( 'textures/2294472375_24a3b8ef46_o.jpg' );
+//				textureEquirec.mapping = THREE.EquirectangularReflectionMapping;
+//				textureEquirec.encoding = THREE.sRGBEncoding;
+//				scene.background = textureCube;
+					material = new THREE.MeshLambertMaterial( { envMap: textureCube } );
+//				//
+
 	for (const model of Object.values(models)) {
 		loader.load( 'assetts/models/orig/' + model.fileName, function ( object ) { // escape
 			object.name = model.name;
@@ -168,12 +168,12 @@ let material;
 			object.position.y = model.yPosit;
 			object.position.z = model.zPosit;
 			object.rotation.y = parseFloat(model.yRot);
-			material = new THREE.MeshPhongMaterial({ side:THREE.doubleSide });
+//			material = new THREE.MeshPhongMaterial({ side:THREE.doubleSide });
 			texture = textureLoader.load( 'assetts/textures/' + model.textureFileName);
 			object.traverse( function ( child ) {
 				if ( child.isMesh ) {
 					child.material = material;
-					child.material.map = texture;
+//					child.material.map = texture;
 				} else {
 					child.wireframe = true;
 				}
