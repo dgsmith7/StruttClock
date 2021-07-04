@@ -1,18 +1,18 @@
 const models =
 	[
    {
-      "fileName":"escape.",
+      "fileName":"escape.obj",
       "name":"g0",
       "xPosit":"0",
       "yPosit":"0",
       "zPosit":"-11.4",
       "yRot":"0.55",
-      "textureFileName":"copperPatina.png",
+      "textureFileName":"t0.png",
       "rotPerSec":"13.708",
       "orbitArm":"0.0"
    },
    {
-      "fileName":"escapePinion.",
+      "fileName":"escapePinion.obj",
       "name":"g1",
       "xPosit":"0",
       "yPosit":"0",
@@ -23,40 +23,41 @@ const models =
       "orbitArm":"0.0"
    },
    {
-      "fileName":"ringGear.",
+      "fileName":"ringGear.obj",
       "name":"g2",
       "xPosit":"0",
       "yPosit":"0.5",
       "zPosit":"0",
       "yRot":"0",
-      "textureFileName":"copperPatina.png",
+      "textureFileName":"polishedBrass.png",
       "rotPerSec":"-0.48959",
       "orbitArm":"0.0"
    },
    {
-      "fileName":"drive.",
+      "fileName":"drive.obj",
       "name":"g3",
       "xPosit":"3.85",
       "yPosit":"-0.5",
       "zPosit":"3.85",
       "yRot":"0.0",
+      "textureFileName":"t3.png",
       "textureFileName":"copperPatina.png",
       "rotPerSec":"0.0083333333333",
       "orbitArm":"0.0"
    },
    {
-      "fileName":"drivePinionMinutes.",
+      "fileName":"drivePinionMinutes.obj",
       "name":"g4",
       "xPosit":"0",
       "yPosit":"-0.5",
       "zPosit":"0",
       "yRot":"0.4",
-      "textureFileName":"copperPatina.png",
+      "textureFileName":"t5.png",
       "rotPerSec":"-0.1",
       "orbitArm":"0.0"
    },
    {
-      "fileName":"arm.",
+      "fileName":"arm.obj",
       "name":"g5",
       "xPosit":"0",
       "yPosit":"0",
@@ -67,18 +68,18 @@ const models =
       "orbitArm":"0.0"
    },
    {
-      "fileName":"planet.",
+      "fileName":"planet.obj",
       "name":"g6",
       "xPosit":"-4.65",
       "yPosit":"0.5",
       "zPosit":"0",
       "yRot":"0",
-      "textureFileName":"copperPatina.png",
+      "textureFileName":"t7.png",
       "rotPerSec":"-0.92499999999999",
       "orbitArm":"-4.65"
    },
    {
-      "fileName":"planetPinion.",
+      "fileName":"planetPinion.obj",
       "name":"g7",
       "xPosit":"-4.65",
       "yPosit":"0.5",
@@ -89,24 +90,57 @@ const models =
       "orbitArm":"-4.65"
    },
    {
-      "fileName":"sunFreeHour.",
+      "fileName":"sunFreeHour.obj",
       "name":"g8",
       "xPosit":"0",
       "yPosit":"1",
       "zPosit":"0",
       "yRot":"0",
-      "textureFileName":"copperPatina.png",
+      "textureFileName":"polishedBrass.png",
       "rotPerSec":"-0.008333333333333",
       "orbitArm":"0.0"
    },
    {
-      "fileName":"sunFixed.",
+      "fileName":"sunFixed.obj",
       "name":"g9",
+      "xPosit":"0",
+      "yPosit":"1.25",
+      "zPosit":"0",
+      "yRot":"1.57",
+      "textureFileName":"copperPatina.png",
+      "rotPerSec":"0.0",
+      "orbitArm":"0.0"
+   },
+   {
+      "fileName":"minuteHand.obj",
+      "name":"g10",
+      "xPosit":"0",
+      "yPosit":"2",
+      "zPosit":"0",
+      "yRot":"1.57",
+      "textureFileName":"t8.png",
+      "rotPerSec":"-0.1",
+      "orbitArm":"0.0"
+   },
+   {
+      "fileName":"hourHand.obj",
+      "name":"g11",
+      "xPosit":"0",
+      "yPosit":"1.75",
+      "zPosit":"0",
+      "yRot":"1.57",
+      "textureFileName":"polishedBrass.png",
+      "rotPerSec":"-0.008333333333333",
+      "orbitArm":"0.0"
+   },
+   {
+      "fileName":"dial.obj",
+      "name":"g12",
       "xPosit":"0",
       "yPosit":"1.5",
       "zPosit":"0",
       "yRot":"1.57",
-      "textureFileName":"copperPatina.png",
+      "textureFileName":"t9.png",
       "rotPerSec":"0.0",
       "orbitArm":"0.0"
    }

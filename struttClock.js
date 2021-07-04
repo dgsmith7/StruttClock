@@ -11,37 +11,33 @@
 //          https://www.youtube.com/watch?v=uwv7Z2I-JiI
 //      A real one
 //          https://www.lainewatches.com/strutt-clock
+//      Very helpful site
+//          https://threejsfundamentals.org
 //////////////////////////////////////////////////////////////////////////////////
 
-let container;
-let camera, scene, renderer;
-let pointLight, directionalLight, ambientLight;
+var container;
+var camera, scene, renderer;
+var pointLight, directionalLight, ambientLight;
 var object;
-let controls;
-let mouseX = 0;
-let mouseY = 0;
-let windowHalfX = window.innerWidth / 2;
-let windowHalfY = window.innerHeight / 2;
+var controls;
+var mouseX = 0;
+var mouseY = 0;
+var windowHalfX = window.innerWidth / 2;
+var windowHalfY = window.innerHeight / 2;
 var num = 0;
-let orbit = 0;
-let now;
-let currentSec;
-let lastSec;
-let rate = 10; // non zero - 60 for accurate timing
-//let rotationOn = false;
-let rotationOn = true;
-let expansion = { intensity : 1 };
+var orbit = 0;
+var now;
+var currentSec;
+var lastSec;
+//var rate = 10; // non zero - 60 for accurate timing
+var timeLapse = { rate : 1 };
+//var rotationOn = false;
+var rotationOn = true;
+var expansion = { intensity : 1 };
 
 //  var twn = [];
 //  var change = true;
 //  var twnLen = 20000;
-
-
-// Set up GUI if desired
-  var gui = new dat.GUI();
-  gui.add(expansion, 'intensity', 1, 10).name("Expansion");
-
-
 
 init();
 animate();
@@ -53,6 +49,8 @@ function init() {
 	setCams();
 	// lighting
 	setLights();
+	// GUI
+	setupGUI();
 	// models
 	loadAssets();
 	// renderer
@@ -88,18 +86,19 @@ function render() { // update scene here
 
 	if (rotationOn == true) {
 		for (const model of Object.values(models)) {
-			scene.getObjectByName(model.name).rotation.y += degrees_to_radians(model.rotPerSec)/rate;								//* escape
+			scene.getObjectByName(model.name).rotation.y += 
+				degrees_to_radians(model.rotPerSec)/(61 - (parseFloat(timeLapse.rate-1) * ((59.0/9.0)) + 1));								//* escape
 			scene.getObjectByName(model.name).position.y = model.yPosit * expansion.intensity;
 			if (model.orbitArm != 0.0) {
 				scene.getObjectByName(model.name).position.x = Math.cos(orbit) * model.orbitArm; 
 				scene.getObjectByName(model.name).position.z = Math.sin(orbit) * model.orbitArm; 
 			}
 		}
-		orbit += degrees_to_radians(0.1)/rate;		//*
+		orbit += degrees_to_radians(0.1)/(61 - (parseFloat(timeLapse.rate-1) * ((59.0/9.0)) + 1));		//*
 		scene.updateMatrixWorld();
 	}
 
-
+	controls.update();
 //	    TWEEN.update();
 
 	renderer.render( scene, camera );
@@ -122,38 +121,65 @@ function setLights() {
 	directionalLight.position.set(-7, 5, -3);
 	directionalLight.target.position.set(8, -2, 4);
 	scene.add( directionalLight );
-	ambientLight = getAmbientLight( 0.7 );
+	ambientLight = getAmbientLight( 1 );
 	scene.add( ambientLight );
+}
+
+function setupGUI() {
+  var gui = new dat.GUI();
+  gui.add(expansion, 'intensity', 1, 10).name("Expansion");
+  gui.add(timeLapse, 'rate', 1, 10).name("Speed of lapse");
 }
 
 function loadAssets() {
 	const loader = new THREE.OBJLoader();
 	const textureLoader = new THREE.TextureLoader();
 	let texture;
-	const material = new THREE.MeshPhongMaterial({ 
-		color : 0xFF0000, 
-		shininess : 150,
-		flatShading : true,
-		emmisive : 0x0000FF,
-		emmisiveIntensity : 1,
-		wireframe : false
-	});
+//	let material = new THREE.MeshPhongMaterial({ 
+//		color : 0xFF0000, 
+//		shininess : 150,
+//		flatShading : true,
+//		emmisive : 0x0000FF,
+//		emmisiveIntensity : 1,
+//		wireframe : false
+//	});
+
+
+////				// Texture cubes as background
+//				const tcLoader = new THREE.CubeTextureLoader();
+//				tcLoader.setPath( 'assetts/textures/cube/polishedBrass/' );  // pixels power of 2
+//				textureCube = tcLoader.load( [ 'posx.png', 'negx.png', 'posy.png', 'negy.png', 'posz.png', 'negz.png' ] );
+//				textureCube.encoding = THREE.sRGBEncoding;
+////				textureCube.mapping = THREE.CubeRefractionMapping;
+//				textureCube.mapping = THREE.CubeReflectionMapping;
+////				textureEquirec = textureLoader.load( 'textures/2294472375_24a3b8ef46_o.jpg' );
+////				textureEquirec.mapping = THREE.EquirectangularReflectionMapping;
+////				textureEquirec.encoding = THREE.sRGBEncoding;
+////				scene.background = textureCube;
+//				let material = new THREE.MeshLambertMaterial( { envMap: textureCube } );
+////				//
+
+let material;
 	for (const model of Object.values(models)) {
-		loader.load( 'assetts/models/' + model.fileName + 'obj', function ( object ) { // escape
+		loader.load( 'assetts/models/orig/' + model.fileName, function ( object ) { // escape
 			object.name = model.name;
 			object.position = new THREE.Vector3();
 			object.position.x = model.xPosit;
 			object.position.y = model.yPosit;
 			object.position.z = model.zPosit;
 			object.rotation.y = parseFloat(model.yRot);
+			material = new THREE.MeshPhongMaterial({ side:THREE.doubleSide });
 			texture = textureLoader.load( 'assetts/textures/' + model.textureFileName);
 			object.traverse( function ( child ) {
 				if ( child.isMesh ) {
-//					child.material = material;
+					child.material = material;
 					child.material.map = texture;
+				} else {
+					child.wireframe = true;
 				}
 			} );
 			console.log( material );
+			console.log( texture );
 			scene.add( object );
 		}, function ( xhr ) {
 			console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
@@ -164,7 +190,7 @@ function loadAssets() {
 }
 
 function buildRenderer() {
-	renderer = new THREE.WebGLRenderer();
+	renderer = new THREE.WebGLRenderer({ antialias:true });
 	renderer.setPixelRatio( window.evicePixelRatio );
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	renderer.setClearColor( 'rgb(0, 0, 0)' );
@@ -174,11 +200,12 @@ function buildRenderer() {
 
 function addOrbitControls() {
 	controls = new THREE.OrbitControls( camera, container );
+//	controls.autoRotate = true;
 	document.getElementById( 'webgl' ).appendChild( container );
 }
 
 function degrees_to_radians( degrees ) {
-	var pi = Math.PI;
+	let pi = Math.PI;
 	return degrees * (pi/180);
 }
 
@@ -207,7 +234,7 @@ function getDirectionalLight( intensity ) {
 }
 
 function getAmbientLight( intensity ) {
-	let light = new THREE.AmbientLight( 0xcccccc, intensity );
+	let light = new THREE.AmbientLight( 0xaaaaaa, intensity );
 	return light;
 }
 
