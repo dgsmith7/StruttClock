@@ -168,12 +168,12 @@ let material;
 			object.position.y = model.yPosit;
 			object.position.z = model.zPosit;
 			object.rotation.y = parseFloat(model.yRot);
-//			material = new THREE.MeshPhongMaterial({ side:THREE.doubleSide });
+//			material = new THREE.MeshPhongMaterial({ side:THREE.doubleSide });  // comment out for cube bg
 			texture = textureLoader.load( 'assetts/textures/' + model.textureFileName);
 			object.traverse( function ( child ) {
 				if ( child.isMesh ) {
 					child.material = material;
-//					child.material.map = texture;
+//					child.material.map = texture;  // comment out for cube bg
 				} else {
 					child.wireframe = true;
 				}

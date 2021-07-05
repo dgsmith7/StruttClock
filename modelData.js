@@ -1,27 +1,27 @@
 const models =
 	[//here wallmount at -1.5, pendulum at -1.25, then frame2 at -1.0
    {
-      "fileName":"escape.obj",
+      "fileName":"escapeWithPinion.obj",
       "name":"g0",
-      "xPosit":"0",
-      "yPosit":"0.75",
-      "zPosit":"-11.4",
-      "yRot":"0.55",
-      "textureFileName":"polishedBrass.png",
-      "rotPerSec":"13.708",
-      "orbitArm":"0.0"
-   },
-   {
-      "fileName":"escapePinion.obj",
-      "name":"g1",
       "xPosit":"0",
       "yPosit":"-0.75",
       "zPosit":"-11.4",
-      "yRot":"0.55",
+      "yRot":"0.66",
       "textureFileName":"polishedBrass.png",
       "rotPerSec":"13.708",
       "orbitArm":"0.0"
    },
+//   {
+//      "fileName":"escapePinion.obj",
+//      "name":"g1",
+//      "xPosit":"0",
+//      "yPosit":"-0.75",
+//      "zPosit":"-11.4",
+//      "yRot":"0.55",
+//      "textureFileName":"polishedBrass.png",
+//      "rotPerSec":"13.708",
+//      "orbitArm":"0.0"
+//   },
    {
       "fileName":"drive.obj",
       "name":"g3",
@@ -46,18 +46,18 @@ const models =
       "orbitArm":"0.0"
    },  //frame1 here at -0.5
    {
-      "fileName":"ringGear.obj",
+      "fileName":"ringAndSpider.obj",
       "name":"g2",
       "xPosit":"0",
-      "yPosit":".25",//ring and spider will be at -0.25
+      "yPosit":"-0.25",
       "zPosit":"0",
-      "yRot":"0",
+      "yRot":"0.0115",
       "textureFileName":"polishedBrass.png",
       "rotPerSec":"-0.48959",
       "orbitArm":"0.0"
    },
    {
-      "fileName":"arm.obj",
+      "fileName":"armWithArbor.obj",//withArbor
       "name":"g5",
       "xPosit":"0",
       "yPosit":"0",
