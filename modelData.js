@@ -1,27 +1,27 @@
 const models =
 	[//here wallmount at -1.5, pendulum at -1.25, then frame2 at -1.0
-//   {
-//      "fileName":"frame3.obj",
-//      "name":"g0",
-//      "xPosit":"0",
-//      "yPosit":"-1.5",
-//      "zPosit":"0",
-//      "yRot":"-0.5235",
-//      "textureFileName":"polishedBrass.png",
-//      "rotPerSec":"0",
-//      "orbitArm":"0.0"
-//   },
-//   {
-//      "fileName":"frame2.obj",
-//      "name":"g1",
-//      "xPosit":"0",
-//      "yPosit":"-1",
-//      "zPosit":"0",
-//      "yRot":"-0.5235",
-//      "textureFileName":"polishedBrass.png",
-//      "rotPerSec":"0",
-//      "orbitArm":"0.0"
-//   },
+   {
+      "fileName":"frame3.obj",
+      "name":"g0",
+      "xPosit":"0",
+      "yPosit":"-1.5",
+      "zPosit":"0",
+      "yRot":"0",
+      "textureFileName":"polishedBrass.png",
+      "rotPerSec":"0",
+      "orbitArm":"0.0"
+   },
+   {
+      "fileName":"frame2.obj",
+      "name":"g1",
+      "xPosit":"0",
+      "yPosit":"-1",
+      "zPosit":"0",
+      "yRot":"0",
+      "textureFileName":"polishedBrass.png",
+      "rotPerSec":"0",
+      "orbitArm":"0.0"
+   },
 //   {
 //      "fileName":"pendulumWithEscapement.obj",
 //      "name":"g2",
@@ -78,17 +78,17 @@ const models =
       "rotPerSec":"-0.1",
       "orbitArm":"0.0"
    },
-//   {
-//      "fileName":"frame1.obj",
-//      "name":"g6",
-//      "xPosit":"0",
-//      "yPosit":"-0.5",
-//      "zPosit":"0",
-//      "yRot":"-0.5235",
-//      "textureFileName":"polishedBrass.png",
-//      "rotPerSec":"0",
-//      "orbitArm":"0.0"
-//   },
+   {
+      "fileName":"frame1.obj",
+      "name":"g6",
+      "xPosit":"0",
+      "yPosit":"-0.5",
+      "zPosit":"0",
+      "yRot":"0",
+      "textureFileName":"polishedBrass.png",
+      "rotPerSec":"0",
+      "orbitArm":"0.0"
+   },
    {
       "fileName":"ringAndSpider.obj",
       "name":"g7",
