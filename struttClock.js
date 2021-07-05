@@ -35,10 +35,6 @@ var timeLapse = { rate : 10 };
 var rotationOn = true;
 var expansion = { intensity : 1 };
 
-//  var twn = [];
-//  var change = true;
-//  var twnLen = 20000;
-
 init();
 animate();
 
@@ -63,9 +59,6 @@ function init() {
 }
 
 function animate( /* renderer,*/ scene, camera, controls ) { // get next frame and dispaly
-	//renderer.render( scene, camera );
-	//	requestAnimationFrame( animate );
-	//TWEEN.update();
 	setTimeout( function() {
 		requestAnimationFrame( animate );
 	}, 1000 / 60);  // fps control
@@ -77,13 +70,6 @@ function render() { // update scene here
 	//	camera.position.x += ( mouseX - camera.position.x ) * .05;
 	//	camera.position.y += ( - mouseY - camera.position.y ) * .05;
 	//	camera.lookAt( object.position );
-
-//	    twn[ang] = new TWEEN.Tween(coords)
-//        .to({x: posit.x, y: posit.y, z: posit.z}, twnLen)
-//        .easing(TWEEN.Easing.Cubic.InOut)
-//        .start();
-
-
 	if (rotationOn == true) {
 		for (const model of Object.values(models)) {
 			scene.getObjectByName(model.name).rotation.y += 
@@ -97,10 +83,7 @@ function render() { // update scene here
 		orbit += degrees_to_radians(0.1)/(61 - (parseFloat(timeLapse.rate-1) * ((59.0/9.0)) + 1));		//*
 		scene.updateMatrixWorld();
 	}
-
 	controls.update();
-//	    TWEEN.update();
-
 	renderer.render( scene, camera );
 } 
 
@@ -135,16 +118,7 @@ function loadAssets() {
 	const loader = new THREE.OBJLoader();
 	const textureLoader = new THREE.TextureLoader();
 	let texture;
-//	let material = new THREE.MeshPhongMaterial({ 
-//		color : 0xFF0000, 
-//		shininess : 150,
-//		flatShading : true,
-//		emmisive : 0x0000FF,
-//		emmisiveIntensity : 1,
-//		wireframe : false
-//	});
-
-let material;
+	let material;
 
 //				// Texture cubes as background
 				const tcLoader = new THREE.CubeTextureLoader();
