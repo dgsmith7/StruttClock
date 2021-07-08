@@ -113,13 +113,13 @@ function loadAssets() {
 	let material;
 	// Texture cubes as background
 	const tcLoader = new THREE.CubeTextureLoader();
-	tcLoader.setPath('/StruttClock/tree/main/Assetts/textures/cube/polishedBrass/'); // pixels power of 2
+	tcLoader.setPath('https://github.com/dgsmith7/StruttClock/blob/main/Assetts/textures/cube/polishedBrass/'); // pixels power of 2
 	textureCube = tcLoader.load(['posx.png', 'negx.png', 'posy.png', 'negy.png', 'posz.png', 'negz.png']);
 	textureCube.encoding = THREE.sRGBEncoding;
 	textureCube.mapping = THREE.CubeReflectionMapping;
 	// Iterate file for models and their parameters
 	for (const model of Object.values(models)) {
-		loader.load('/StruttClock/tree/main/Assetts/models/orig/' + model.fileName, function(object) {
+		loader.load('https://github.com/dgsmith7/StruttClock/blob/main/Assetts/models/orig/' + model.fileName, function(object) {
 			object.name = model.name;
 			object.position = new THREE.Vector3();
 			object.position.x = model.xPosit;
