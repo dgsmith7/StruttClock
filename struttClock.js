@@ -119,7 +119,7 @@ function loadAssets() {
 	textureCube.mapping = THREE.CubeReflectionMapping;
 	// Iterate file for models and their parameters
 	for (const model of Object.values(models)) {
-		loader.load('' + model.fileName, function(object) {
+		loader.load('https://github.com/dgsmith7/StruttClock/blob/main/Assetts/models/orig/' + model.fileName, function(object) {
 			object.name = model.name;
 			object.position = new THREE.Vector3();
 			object.position.x = model.xPosit;
@@ -132,7 +132,7 @@ function loadAssets() {
 				roughness: 0.2,
 				envMap: textureCube
 			});
-			texture = textureLoader.load('assetts/textures/' + model.textureFileName);
+			texture = textureLoader.load('https://github.com/dgsmith7/StruttClock/blob/main/Assetts/textures/' + model.textureFileName);
 			object.traverse(function(child) {
 				if (child.isMesh) {
 					child.material = material;
