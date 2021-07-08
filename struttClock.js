@@ -17,23 +17,18 @@
 
 var container;
 var camera, scene, renderer;
-var pointLight, directionalLight, ambientLight;
-var object;
+var spotLight, pointLight, pointLight2;
 var controls;
-var mouseX = 0;
-var mouseY = 0;
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
-var num = 0;
 var orbit = 0;
-var now;
-var currentSec;
-var lastSec;
-//var rate = 10; // non zero - 60 for accurate timing
-var timeLapse = { rate : 10 };
-//var rotationOn = false;
+var timeLapse = {
+	rate: 10
+};
 var rotationOn = true;
-var expansion = { intensity : 1 };
+var expansion = {
+	intensity: 1
+};
 
 init();
 animate();
@@ -54,64 +49,61 @@ function init() {
 	// orbit controlls if desired
 	addOrbitControls();
 	// event listeners
-	window.addEventListener( 'resize', onWindowResize );
+	window.addEventListener('resize', onWindowResize);
 	animate();
 }
 
-function animate( /* renderer,*/ scene, camera, controls ) { // get next frame and dispaly
-	setTimeout( function() {
-		requestAnimationFrame( animate );
-	}, 1000 / 60);  // fps control
-
+function animate() { // get next frame and dispaly
+	setTimeout(function() {
+		requestAnimationFrame(animate);
+	}, 1000 / 60); // fps control
 	render();
 }
 
 function render() { // update scene here
-	//	camera.position.x += ( mouseX - camera.position.x ) * .05;
-	//	camera.position.y += ( - mouseY - camera.position.y ) * .05;
-	//	camera.lookAt( object.position );
 	if (rotationOn == true) {
 		for (const model of Object.values(models)) {
-			scene.getObjectByName(model.name).rotation.y += 
-				degrees_to_radians(model.rotPerSec)/(61 - (parseFloat(timeLapse.rate-1) * ((59.0/9.0)) + 1));								//* escape
+			scene.getObjectByName(model.name).rotation.y +=
+				degrees_to_radians(model.rotPerSec) / (61 - (parseFloat(timeLapse.rate - 1) * ((59.0 / 9.0)) + 1)); //* escape
 			scene.getObjectByName(model.name).position.y = model.yPosit * expansion.intensity;
 			if (model.orbitArm != 0.0) {
-				scene.getObjectByName(model.name).position.x = Math.cos(orbit) * model.orbitArm; 
-				scene.getObjectByName(model.name).position.z = Math.sin(orbit) * model.orbitArm; 
+				scene.getObjectByName(model.name).position.x = Math.cos(orbit) * model.orbitArm;
+				scene.getObjectByName(model.name).position.z = Math.sin(orbit) * model.orbitArm;
 			}
 		}
-		orbit += degrees_to_radians(0.1)/(61 - (parseFloat(timeLapse.rate-1) * ((59.0/9.0)) + 1));		//*
+		orbit += degrees_to_radians(0.1) / (61 - (parseFloat(timeLapse.rate - 1) * ((59.0 / 9.0)) + 1)); //*
 		scene.updateMatrixWorld();
 	}
 	controls.update();
-	renderer.render( scene, camera );
-} 
+	renderer.render(scene, camera);
+}
 
 function setCams() {
-	camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 1, 1000);
+	camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
 	camera.position.x = 0;
 	camera.position.y = 25;
 	camera.position.z = 25;
-	camera.lookAt(new THREE.Vector3( 0, 0, 0 ));
-	scene.add( camera );
+	camera.lookAt(new THREE.Vector3(0, 0, 0));
+	scene.add(camera);
 }
 
 function setLights() {
-	pointLight = getPointLight( 0.8 );
-	scene.add( pointLight );
-	camera.add( pointLight );
-	directionalLight = getDirectionalLight( 0.5 );
-	directionalLight.position.set(-7, 5, -3);
-	directionalLight.target.position.set(8, -2, 4);
-	scene.add( directionalLight );
-	ambientLight = getAmbientLight( 1 );
-	scene.add( ambientLight );
+	spotLight = getSpotLight();
+	scene.add(spotLight);
+	camera.add(spotLight);
+	pointLight = getPointLight(0.5);
+	scene.add(pointLight);
+	pointLight2 = getPointLight(0.5);
+	pointLight2.position.set(4.0, -1, 4.0);
+	scene.add(pointLight2);
+	ambientLight = getAmbientLight(2);
+	scene.add(ambientLight);
 }
 
 function setupGUI() {
-  var gui = new dat.GUI();
-  gui.add(expansion, 'intensity', 1, 10).name("Expansion");
-  gui.add(timeLapse, 'rate', 1, 10).name("Speed of lapse");
+	var gui = new dat.GUI();
+	gui.add(expansion, 'intensity', 1, 10).name("Expansion");
+	gui.add(timeLapse, 'rate', 1, 10).name("Speed of lapse");
 }
 
 function loadAssets() {
@@ -119,102 +111,87 @@ function loadAssets() {
 	const textureLoader = new THREE.TextureLoader();
 	let texture;
 	let material;
-
-//				// Texture cubes as background
-				const tcLoader = new THREE.CubeTextureLoader();
-				tcLoader.setPath( 'assetts/textures/cube/polishedBrass/' );  // pixels power of 2
-				textureCube = tcLoader.load( [ 'posx.png', 'negx.png', 'posy.png', 'negy.png', 'posz.png', 'negz.png' ] );
-				textureCube.encoding = THREE.sRGBEncoding;
-//				textureCube.mapping = THREE.CubeRefractionMapping;
-				textureCube.mapping = THREE.CubeReflectionMapping;
-//				textureEquirec = textureLoader.load( 'textures/2294472375_24a3b8ef46_o.jpg' );
-//				textureEquirec.mapping = THREE.EquirectangularReflectionMapping;
-//				textureEquirec.encoding = THREE.sRGBEncoding;
-//				scene.background = textureCube;
-					material = new THREE.MeshLambertMaterial( { envMap: textureCube } );
-//				//
-
+	// Texture cubes as background
+	const tcLoader = new THREE.CubeTextureLoader();
+	tcLoader.setPath('assetts/textures/cube/polishedBrass/'); // pixels power of 2
+	textureCube = tcLoader.load(['posx.png', 'negx.png', 'posy.png', 'negy.png', 'posz.png', 'negz.png']);
+	textureCube.encoding = THREE.sRGBEncoding;
+	textureCube.mapping = THREE.CubeReflectionMapping;
+	// Iterate file for models and their parameters
 	for (const model of Object.values(models)) {
-		loader.load( 'assetts/models/orig/' + model.fileName, function ( object ) { // escape
+		loader.load('assetts/models/orig/' + model.fileName, function(object) {
 			object.name = model.name;
 			object.position = new THREE.Vector3();
 			object.position.x = model.xPosit;
 			object.position.y = model.yPosit;
 			object.position.z = model.zPosit;
 			object.rotation.y = parseFloat(model.yRot);
-//			material = new THREE.MeshPhongMaterial({ side:THREE.doubleSide });  // comment out for cube bg
-			texture = textureLoader.load( 'assetts/textures/' + model.textureFileName);
-			object.traverse( function ( child ) {
-				if ( child.isMesh ) {
+			material = new THREE.MeshStandardMaterial({
+				color: parseInt(model.color),
+				metalness: 0.8,
+				roughness: 0.2,
+				envMap: textureCube
+			});
+			texture = textureLoader.load('assetts/textures/' + model.textureFileName);
+			object.traverse(function(child) {
+				if (child.isMesh) {
 					child.material = material;
-//					child.material.map = texture;  // comment out for cube bg
-				} else {
-					child.wireframe = true;
 				}
-			} );
-			console.log( material );
-			console.log( texture );
-			scene.add( object );
-		}, function ( xhr ) {
-			console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-		}, function ( error ) {
-			console.log( 'An error happened' );
-		} );
+			});
+			scene.add(object);
+		}, function(xhr) {
+			console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+		}, function(error) {
+			console.log('An error happened:' + error);
+		});
 	}
 }
 
 function buildRenderer() {
-	renderer = new THREE.WebGLRenderer({ antialias:true });
-	renderer.setPixelRatio( window.evicePixelRatio );
-	renderer.setSize( window.innerWidth, window.innerHeight );
-	renderer.setClearColor( 'rgb(0, 0, 0)' );
-	//	renderer.shadowMap.enabled = true;
+	renderer = new THREE.WebGLRenderer({
+		antialias: true
+	});
+	renderer.setPixelRatio(window.evicePixelRatio);
+	renderer.setSize(window.innerWidth, window.innerHeight);
+	renderer.setClearColor('rgb(0, 0, 0)');
+	renderer.shadowMap.enabled = true;
 	container = renderer.domElement;
 }
 
 function addOrbitControls() {
-	controls = new THREE.OrbitControls( camera, container );
-//	controls.autoRotate = true;
-	document.getElementById( 'webgl' ).appendChild( container );
+	controls = new THREE.OrbitControls(camera, container);
+	controls.minDistance = 20;
+	controls.maxDistance = 70;
+	document.getElementById('webgl').appendChild(container);
 }
 
-function degrees_to_radians( degrees ) {
+function degrees_to_radians(degrees) {
 	let pi = Math.PI;
-	return degrees * (pi/180);
+	return degrees * (pi / 180);
 }
 
 function onWindowResize() {
 	windowHalfX = window.innerWidth / 2;
-	windowHalyY = window.innerHeight / 2;
+	windowHalfY = window.innerHeight / 2;
 	camera.aspect = window.innerWidth / window.innerHeight;
 	camera.updateProjectionMatrix();
-	renderer.setSize( window.innerWidth, window.innerHeight );
+	renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-function getPointLight( intensity ) {
-	let light = new THREE.PointLight( 0xffffff, intensity );
-	light.castShadow = true;
+function getPointLight() {
+	let light = new THREE.PointLight(0xffffff, 2, 800, 2);
+	light.position.set(0, 0, 0);
 	return light;
 }
 
-function getDirectionalLight( intensity ) {
-	let light = new THREE.DirectionalLight( 0xffffff, intensity );
-	light.castShadow = true;
-	light.shadow.camera.left = -10;
-	light.shadow.camera.bottom = -10;
-	light.shadow.camera.right = 10;
-	light.shadow.camera.top = 10;
+function getSpotLight() {
+	let light = new THREE.SpotLight(0x555555, 0.1, 0, 0.2, 1, 2);
+	light.position.set(50, 500, 100);
+	light.target.position.set(0, 0, 0);
 	return light;
 }
 
-function getAmbientLight( intensity ) {
-	let light = new THREE.AmbientLight( 0xaaaaaa, intensity );
-	return light;
-}
-
-function getHemisphereLight( intensity ) {
-	let skyColor = 0xB1E1FF;  // light blue
-	let groundColor = 0xB97A20;  // brownish orangelet
-	light = new THREE.HemisphereLight( skyColor, groundColor, intensity );
+function getAmbientLight(intensity) {
+	let light = new THREE.AmbientLight(0xffffff, intensity);
 	return light;
 }
