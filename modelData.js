@@ -140,7 +140,7 @@ const models =
       "zPosit":"0",
       "yRot":"1.57",
       "color":"0x727579",
-      "textureFileName":"copperPatina.png",
+      "textureFileName":"polishedBrass.png",
       "rotPerSec":"0.0",
       "orbitArm":"0.0"
    },
