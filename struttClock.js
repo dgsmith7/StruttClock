@@ -151,7 +151,7 @@ function buildRenderer() {
 	renderer = new THREE.WebGLRenderer({
 		antialias: true
 	});
-	renderer.setPixelRatio(window.evicePixelRatio);
+	renderer.setPixelRatio(window.devicePixelRatio);
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	renderer.setClearColor('rgb(0, 0, 0)');
 	renderer.shadowMap.enabled = true;
