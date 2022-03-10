@@ -113,13 +113,13 @@ function loadAssets() {
 	let material;
 	// Texture cubes as background
 	const tcLoader = new THREE.CubeTextureLoader();
-	tcLoader.setPath('https://dgsmith7.github.io/StruttClock/Assetts/textures/cube/polishedBrass/'); // pixels power of 2
+	tcLoader.setPath('./Assetts/textures/cube/polishedBrass/'); // pixels power of 2
 	textureCube = tcLoader.load(['posx.png', 'negx.png', 'posy.png', 'negy.png', 'posz.png', 'negz.png']);
 	textureCube.encoding = THREE.sRGBEncoding;
 	textureCube.mapping = THREE.CubeReflectionMapping;
 	// Iterate file for models and their parameters
 	for (const model of Object.values(models)) {
-		loader.load('https://dgsmith7.github.io/StruttClock/Assetts/models/orig/' + model.fileName, function(object) {
+		loader.load('./Assetts/models/orig/' + model.fileName, function(object) {
 			object.name = model.name;
 			object.position = new THREE.Vector3();
 			object.position.x = model.xPosit;
@@ -132,7 +132,7 @@ function loadAssets() {
 				roughness: 0.2,
 				envMap: textureCube
 			});
-			texture = textureLoader.load('https://dgsmith7.github.io/StruttClock/Assetts/textures/' + model.textureFileName);
+			texture = textureLoader.load('./Assetts/textures/' + model.textureFileName);
 			object.traverse(function(child) {
 				if (child.isMesh) {
 					child.material = material;
